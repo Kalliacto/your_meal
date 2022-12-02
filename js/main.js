@@ -1,18 +1,25 @@
+import {
+    modalProduct,
+    catalogList,
+    modalProductTitle,
+    modalProductImage,
+    modalProductDescription,
+    ingredientsCalories,
+    ingredientsList,
+    modalProductPriceCount,
+} from './elements.js'
 // const productDetail = document.querySelectorAll('.product__detail');
-const modalProduct = document.querySelector('.modal_product');
-const catalogList = document.querySelector('.catalog__list');
-
 // productDetail.forEach((product) => {
 //     product.addEventListener('click', () => {
 //         modalProduct.classList.add('modal_open');   
 //     })
 // })
 //--------------------------------------------------------------------------------/
-const product = {
+const burger = {
     title: 'Бургер Макс',
     price: '10000',
     weight: '5000',
-    calories: '15000',
+    calories: '1500',
     description: 'Огромный бургер для тебя и компании',
     img: 'img/megaburger.jpg',
     ingredients: [
@@ -23,74 +30,95 @@ const product = {
         'Соус горчичный',
     ]
 };
-// Получаем и отрисовываем контент в модалке
-const modalProductTitle= document.querySelector('.modal-product__title');
-const modalProductImage = document.querySelector('.modal-product__image');
-const modalProductDescription = document.querySelector('.modal-product__description');
 
-const ingredientsList = document.querySelector('.ingredients__list');
-const ingredientsCalories = document.querySelector('.ingredients__calories');
-const modalProductPriceCount = document.querySelector('.modal-product__price-count');
+const openModal = (product) => {
+    // отрисовываем контент в модалке
+    modalProductImage.src = product.img;
+    modalProductTitle.textContent = product.title;
+    // ingredientsList очищаем 
+    // через цикл перебираем все ингридиенты из product.ingredients
+    ingredientsList.textContent = '';
+    // for (i = 0; i < product.ingredients.length; i++) {
+    //     // создаем необходимый элемент с помощью метода createElement() 
+    //     const li = document.createElement('li');
+    //     // И добавляем элементу необходимый класс
+    //     li.classList.add('ingredients__item');
+    //     // отрисовываем текст в li со значением product.ingredients[i]
+    //     li.textContent = product.ingredients[i];
+    //     // Передаем созданные элемент в ingredientsList
+    //     ingredientsList.append(li);
+    // };
+    // --------------Или через forEach отрисовываем ингридиенты в модалке
+    // product.ingredients.forEach((item) => {
+    //     const li = document.createElement('li');
+    //     li.classList.add('ingredients__item');
+    //     li.textContent = item;
+    //     ingredientsList.append(li);
+    // })
+    // --------------Или через map отрисовываем ингридиенты в модалке
+    const ingredientsListItems = product.ingredients.map((item) => {
+        const li = document.createElement('li');
+        li.classList.add('ingredients__item');
+        li.textContent = item;
+        return li;
+    });
 
-modalProductTitle.textContent = product.title;
-modalProductImage.src = product.img;
-// ingredientsList очищаем 
-ingredientsList.textContent = '';
-// через цикл перебираем все ингридиенты из product.ingredients
-// for (i = 0; i < product.ingredients.length; i++) {
-//     // создаем необходимый элемент с помощью метода createElement() 
-//     const li = document.createElement('li');
-//     // И добавляем элементу необходимый класс
-//     li.classList.add('ingredients__item');
-//     // отрисовываем текст в li со значением product.ingredients[i]
-//     li.textContent = product.ingredients[i];
-//     // Передаем созданные элемент в ingredientsList
-//     ingredientsList.append(li);
-// };
-// --------------Или через forEach отрисовываем ингридиенты в модалке
-// product.ingredients.forEach((item) => {
-//     const li = document.createElement('li');
-//     li.classList.add('ingredients__item');
-//     li.textContent = item;
-//     ingredientsList.append(li);
-// })
-// --------------Или через map отрисовываем ингридиенты в модалке
-const ingredientsListItems = product.ingredients.map((item) => {
+    ingredientsList.append(...ingredientsListItems);
+
+
+    modalProductDescription.textContent = product.description;
+    ingredientsCalories.textContent = `${product.weight} г., ккал ${product.calories}`;
+    modalProductPriceCount.textContent = product.price;
+
+    // modalProductPriceCount.textContent = formatCurrency(product.price);
+    // const formatCurrency = (n) => {
+    //     const currency = new Intl.NumberFormat('ru-RU', {
+    //         style: 'currency',
+    //         currency: 'RUB',
+    //         maximumFractionDigits: 0,
+    //     });
+    //      return currency.format(n);
+    // }
+    // modalProductPriceCount.textContent = formatCurrency(product.price);
+    modalProduct.classList.add('modal_open'); 
+};
+//----------------------Отрисовка карточек----------------------------------------------------------/
+const createCardProduct = (product) => {
     const li = document.createElement('li');
-    li.classList.add('ingredients__item');
-    li.textContent = item;
+    li.classList.add('catalog__item');
+
+    li.innerHTML = `
+        <article class="product">
+            <img class="product__image" src="${product.img}" alt="${product.title}">
+            <p class="product__price">${product.price}<span class="currency">₽</span></p>
+            <h3 class="product__title">
+                <button class="product__detail">${product.title}</button>
+            </h3>
+            <p class="product__weight">${product.weight}г</p>
+            <button class="product__add">Добавить</button>
+        </article>
+    `;
+
     return li;
-});
+};
 
-ingredientsList.append(...ingredientsListItems);
+catalogList.textContent = '';
 
+const item = createCardProduct(burger);
+// console.log(item);
+catalogList.append(item);
 
-modalProductDescription.textContent = product.description;
-ingredientsCalories.textContent = product.calories;
-modalProductPriceCount.textContent = product.price;
-
-// modalProductPriceCount.textContent = formatCurrency(product.price);
-// // const formatCurrency = (n) => {
-//     const currency = new Intl.NumberFormat('ru-RU', {
-//         style: 'currency',
-//         currency: 'RUB',
-//         maximumFractionDigits: 0,
-//     });
-//      return currency.format(n);
-// }
-// modalProductPriceCount.textContent = formatCurrency(product.price);
-
-//--------------------------------------------------------------------------------/
+//----------------------Открытие модалки----------------------------------------------------------/
 
 catalogList.addEventListener('click', (event) => {
     const target = event.target;
 
     if (target.closest('.product__detail') || target.closest('.product__image')) {
-        modalProduct.classList.add('modal_open'); 
+        openModal(burger);
     }
 });
 
-//--------------------------------------------------------------------------------/
+//--------------------------Закрытие модалки------------------------------------------------------/
 modalProduct.addEventListener('click', (event) => {
     const target = event.target;
     // закрываем модалку по клику или на элемент который имеет класс modal__close || по клику на элемент который имеет modalProduct, n.e за пределами модального окна в оверлее

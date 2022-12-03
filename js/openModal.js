@@ -1,3 +1,4 @@
+import { API_URL, PREFIX_PRODUCT } from "./const.js";
 import { 
     ingredientsList,
     modalProduct,
@@ -7,11 +8,13 @@ import {
     ingredientsCalories,
     modalProductPriceCount,
 } from "./elements.js";
+import { getData } from "./getData.js";
 
 
-export const openModal = (product) => {
+export const openModal = async (id) => {
+    const product = await getData(`${API_URL}${PREFIX_PRODUCT}/${id}`);
     // отрисовываем контент в модалке
-    modalProductImage.src = product.img;
+    modalProductImage.src = `${API_URL}/${product.image}`;
     modalProductTitle.textContent = product.title;
     // ingredientsList очищаем 
     // через цикл перебираем все ингридиенты из product.ingredients

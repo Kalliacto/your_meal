@@ -37,7 +37,8 @@ catalogList.addEventListener('click', (event) => {
     const target = event.target;
 
     if (target.closest('.product__detail') || target.closest('.product__image')) {
-        openModal(burger);
+        const id = target.closest('.product').dataset.idProduct;
+        openModal(id);
     }
 });
 
@@ -52,6 +53,6 @@ modalProduct.addEventListener('click', (event) => {
 //--------------------------------------------------------------------------------/
 const init = () => {
     renderListProduct();
-    navigationListController();
+    navigationListController(renderListProduct);
 }
  init();

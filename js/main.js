@@ -6,6 +6,8 @@ import {
 import { openModal } from './openModal.js';
 import { renderListProduct } from './renderListProduct.js';
 
+import { navigationListController } from './navigationList.js'
+
 // const productDetail = document.querySelectorAll('.product__detail');
 // productDetail.forEach((product) => {
 //     product.addEventListener('click', () => {
@@ -50,5 +52,6 @@ modalProduct.addEventListener('click', (event) => {
 //--------------------------------------------------------------------------------/
 const init = () => {
     renderListProduct();
+    navigationListController();
 }
  init();

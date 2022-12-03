@@ -3,9 +3,8 @@ import {
     catalogList,
 } from './elements.js'
 
-import { createCardProduct } from './createCardProduct.js';
-
 import { openModal } from './openModal.js';
+import { renderListProduct } from './renderListProduct.js';
 
 // const productDetail = document.querySelectorAll('.product__detail');
 // productDetail.forEach((product) => {
@@ -20,7 +19,7 @@ const burger = {
     weight: '5000',
     calories: '1500',
     description: 'Огромный бургер для тебя и компании',
-    img: 'img/megaburger.jpg',
+    image: 'img/megaburger.jpg',
     ingredients: [
         'Пшеничная булочка',
         'Мега котлета',
@@ -30,12 +29,6 @@ const burger = {
     ]
 };
 
-//----------------------Отрисовка карточек----------------------------------------------------------/
-catalogList.textContent = '';
-
-const item = createCardProduct(burger);
-// console.log(item);
-catalogList.append(item);
 //----------------------Открытие модалки----------------------------------------------------------/
 
 catalogList.addEventListener('click', (event) => {
@@ -55,4 +48,7 @@ modalProduct.addEventListener('click', (event) => {
     }
     });
 //--------------------------------------------------------------------------------/
-
+const init = () => {
+    renderListProduct();
+}
+ init();

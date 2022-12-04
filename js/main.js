@@ -2,11 +2,10 @@ import {
     modalProduct,
     catalogList,
 } from './elements.js'
-
 import { openModal } from './openModal.js';
 import { renderListProduct } from './renderListProduct.js';
-
-import { navigationListController } from './navigationList.js'
+import { navigationListController } from './navigationList.js';
+import { cartInit } from './cart.js';
 
 // const productDetail = document.querySelectorAll('.product__detail');
 // productDetail.forEach((product) => {
@@ -15,22 +14,21 @@ import { navigationListController } from './navigationList.js'
 //     })
 // })
 //--------------------------------------------------------------------------------/
-const burger = {
-    title: 'Бургер Макс',
-    price: '10000',
-    weight: '5000',
-    calories: '1500',
-    description: 'Огромный бургер для тебя и компании',
-    image: 'img/megaburger.jpg',
-    ingredients: [
-        'Пшеничная булочка',
-        'Мега котлета',
-        'Красный лук',
-        'Листья салата',
-        'Соус горчичный',
-    ]
-};
-
+// const burger = {
+//     title: 'Бургер Макс',
+//     price: '10000',
+//     weight: '5000',
+//     calories: '1500',
+//     description: 'Огромный бургер для тебя и компании',
+//     image: 'img/megaburger.jpg',
+//     ingredients: [
+//         'Пшеничная булочка',
+//         'Мега котлета',
+//         'Красный лук',
+//         'Листья салата',
+//         'Соус горчичный',
+//     ]
+// };
 //----------------------Открытие модалки----------------------------------------------------------/
 
 catalogList.addEventListener('click', (event) => {
@@ -54,5 +52,7 @@ modalProduct.addEventListener('click', (event) => {
 const init = () => {
     renderListProduct();
     navigationListController(renderListProduct);
+    cartInit();
 }
- init();
+// localStorage.clear();
+init();

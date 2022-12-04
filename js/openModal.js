@@ -7,6 +7,7 @@ import {
     modalProductDescription,
     ingredientsCalories,
     modalProductPriceCount,
+    modalProductBtn,
 } from "./elements.js";
 import { getData } from "./getData.js";
 
@@ -50,7 +51,7 @@ export const openModal = async (id) => {
     modalProductDescription.textContent = product.description;
     ingredientsCalories.textContent = `${product.weight} г., ккал ${product.calories}`;
     modalProductPriceCount.textContent = product.price;
-
+    modalProductBtn.dataset.idProduct = product.id;
     // modalProductPriceCount.textContent = formatCurrency(product.price);
     // const formatCurrency = (n) => {
     //     const currency = new Intl.NumberFormat('ru-RU', {

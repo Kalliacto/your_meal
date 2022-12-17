@@ -10,6 +10,8 @@ export const ingredientsList = document.querySelector('.ingredients__list');
 export const modalProductPriceCount = document.querySelector('.modal-product__price-count');
 export const countAmount = document.querySelector('.modal-product .count__amount');
 export const modalProductBtn = document.querySelector('.modal-product__btn');
+
+export const modalDelivery = document.querySelector('.modal_delivery');
 // ---------------Элементы новигации----------------------------
 export const navigationList = document.querySelector('.navigation__list');
 export const navigationListItems = document.querySelectorAll('.navigation__button');
@@ -18,6 +20,7 @@ export const catalogTitle = document.querySelector('.catalog__title');
 export const orderCount = document.querySelector('.order__count');
 export const orderList = document.querySelector('.order__list');
 export const orderTotalAmount = document.querySelector('.order__total-amount');
+export const orderSubmit = document.querySelector('.order__submit');
 // -----Элементы для раскрытия корзины на мобилке----------------------
 export const order = document.querySelector('.order');
 export const orderWrapTitle = document.querySelector('.order__wrap-title');

@@ -1,4 +1,4 @@
-import { catalogList, countAmount, modalProductBtn, order, orderCount, orderList, orderTotalAmount, orderWrapTitle } from './elements.js'
+import { catalogList, countAmount, modalDelivery, modalProductBtn, order, orderCount, orderList, orderSubmit, orderTotalAmount, orderWrapTitle } from './elements.js'
 import { getData } from './getData.js';
 import { API_URL, PREFIX_PRODUCT } from "./const.js";
 // Несколько функций для работы с корзиной
@@ -17,6 +17,10 @@ const getCart = () => {
 const renderCartList = async () => {
     const cartList = getCart();
     const allIdProduct = cartList.map(item => item.id);
+
+    // если корзина пуста блокируем кнопку
+    orderSubmit.disabled = !cartList.length;
+
 // с помощью id нужно запросить данные с сервера и записать в data
     const data = cartList.length 
     ? await getData(`${API_URL}${PREFIX_PRODUCT}?list=${allIdProduct}`)
@@ -124,6 +128,10 @@ const cartController = () => {
     orderWrapTitle.addEventListener('click', () => {
         // Метод toggle добавляет класс если его нет и убирает класс если он есть
         order.classList.toggle('order_open');
+    })
+
+    orderSubmit.addEventListener('click', () => {
+        modalDelivery.classList.add('modal_open');
     })
 };
 

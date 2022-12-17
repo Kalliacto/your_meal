@@ -17,4 +17,4 @@ export const catalogTitle = document.querySelector('.catalog__title');
 // -----Элементы для корзины----------------------
 export const orderCount = document.querySelector('.order__count');
 export const orderList = document.querySelector('.order__list');
-export const ordertotalAmount = document.querySelector('.order__total-amount');
+export const orderTotalAmount = document.querySelector('.order__total-amount');

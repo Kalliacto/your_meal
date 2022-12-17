@@ -1,4 +1,4 @@
-import { catalogList, countAmount, modalProductBtn, orderCount, orderList, orderTotalAmount } from './elements.js'
+import { catalogList, countAmount, modalProductBtn, order, orderCount, orderList, orderTotalAmount, orderWrapTitle } from './elements.js'
 import { getData } from './getData.js';
 import { API_URL, PREFIX_PRODUCT } from "./const.js";
 // Несколько функций для работы с корзиной
@@ -90,6 +90,10 @@ const removeCart = (id) => {
     const productIndex = cartList.findIndex((item) => item.id === id);
     cartList[productIndex].count -= 1;
 
+    if  (cartList[productIndex].count === 0) {
+        cartList.splice(productIndex, 1)
+    }
+
     updateCartList(cartList);
 };
 // ****************************Все слушатели корзины в одном месте****************************
@@ -116,6 +120,11 @@ const cartController = () => {
             removeCart(targetMinus.dataset.idProduct);
         } 
     });
+
+    orderWrapTitle.addEventListener('click', () => {
+        // Метод toggle добавляет класс если его нет и убирает класс если он есть
+        order.classList.toggle('order_open');
+    })
 };
 
 

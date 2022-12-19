@@ -12,6 +12,7 @@ export const countAmount = document.querySelector('.modal-product .count__amount
 export const modalProductBtn = document.querySelector('.modal-product__btn');
 
 export const modalDelivery = document.querySelector('.modal_delivery');
+export const modalDeliveryForm = document.querySelector('.modal-delivery__form');
 // ---------------Элементы новигации----------------------------
 export const navigationList = document.querySelector('.navigation__list');
 export const navigationListItems = document.querySelectorAll('.navigation__button');

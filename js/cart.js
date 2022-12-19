@@ -1,10 +1,11 @@
 import { catalogList, countAmount, modalDelivery, modalProductBtn, order, orderCount, orderList, orderSubmit, orderTotalAmount, orderWrapTitle } from './elements.js'
 import { getData } from './getData.js';
 import { API_URL, PREFIX_PRODUCT } from "./const.js";
+import { orderController } from './orderController.js';
 // Несколько функций для работы с корзиной
 
 // ****************************Получение корзины****************************
-const getCart = () => {
+export const getCart = () => {
     // Получаем список товаров из localStorage(хранилище внутри браузера)
     const cartList = localStorage.getItem('cart');
     if (cartList) {
@@ -128,11 +129,17 @@ const cartController = () => {
     orderWrapTitle.addEventListener('click', () => {
         // Метод toggle добавляет класс если его нет и убирает класс если он есть
         order.classList.toggle('order_open');
-    })
+    });
 
     orderSubmit.addEventListener('click', () => {
         modalDelivery.classList.add('modal_open');
-    })
+    });
+
+    modalDelivery.addEventListener('click', ({target}) => {
+        if (target.closest('.modal__close') || modalDelivery === target ) {
+            modalDelivery.classList.remove('modal_open');
+        }
+    });
 };
 
 
@@ -140,6 +147,7 @@ const cartController = () => {
 export const cartInit = () => {
     cartController();
     renderCartList();
+    orderController();
 };
 
 
